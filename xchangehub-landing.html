@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XchangeHub — Skill Exchange for Every Indian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --saffron: #E87722;
+    --saffron-light: #F9E8D4;
+    --saffron-dark: #B85A0F;
+    --teal: #0F7B6C;
+    --teal-light: #D0EDE8;
+    --teal-dark: #0A5248;
+    --cream: #FAF6EF;
+    --ink: #1C1A17;
+    --ink-muted: #5C5649;
+    --ink-faint: #A69E8F;
+    --white: #FFFFFF;
+    --border: rgba(28,26,23,0.12);
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ======= NAV ======= */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(250,246,239,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--saffron); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--saffron); }
+
+  .nav-cta {
+    background: var(--saffron);
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.1s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--saffron-dark) !important;
+    color: var(--white) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ======= HERO ======= */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 3rem 4rem;
+    gap: 4rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--saffron-light);
+    color: var(--saffron-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--saffron);
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .accent { color: var(--saffron); }
+  .hero h1 .teal { color: var(--teal); }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--saffron);
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--saffron-dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    color: var(--teal);
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1.5px solid var(--teal);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-secondary:hover { opacity: 0.7; }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-top: 0.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .exchange-diagram {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+  }
+
+  .exchange-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .user-pair {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .user-bubble {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+    text-align: center;
+  }
+
+  .user-bubble.teach { background: var(--saffron-light); }
+  .user-bubble.learn { background: var(--teal-light); }
+
+  .avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .avatar.s { background: var(--saffron); color: var(--white); }
+  .avatar.t { background: var(--teal); color: var(--white); }
+
+  .user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  .skill-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+  }
+
+  .skill-tag.teach { background: var(--saffron); color: var(--white); }
+  .skill-tag.learn { background: var(--teal); color: var(--white); }
+
+  .exchange-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ink-faint);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .arrow-icon {
+    font-size: 1.5rem;
+    color: var(--saffron);
+  }
+
+  .exchange-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+
+  .zero-badge {
+    background: #E8F7EF;
+    color: #0A7A50;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Floating chips */
+  .float-chip {
+    position: absolute;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .float-chip:nth-child(2) { animation-delay: 1.5s; }
+  .float-chip:nth-child(3) { animation-delay: 3s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .chip-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  /* ======= SECTION BASE ======= */
+  section { padding: 6rem 3rem; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ======= PROBLEM STRIP ======= */
+  .problem-strip {
+    background: var(--ink);
+    color: var(--white);
+    padding: 4rem 3rem;
+  }
+
+  .problem-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .problem-headline {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+  }
+
+  .problem-headline .hl { color: var(--saffron); }
+
+  .problem-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .prob-stat {
+    border-left: 3px solid var(--saffron);
+    padding-left: 1.25rem;
+  }
+
+  .prob-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .prob-stat-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.4rem;
+    line-height: 1.4;
+  }
+
+  /* ======= HOW IT WORKS ======= */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .how-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .how-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.07);
+  }
+
+  .how-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--saffron-light);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .how-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .how-desc {
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  .how-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+  }
+
+  /* ======= FEATURES ======= */
+  .features-section { background: var(--white); }
+
+  .features-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .feat-card {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--saffron);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .feat-card:hover::before { transform: scaleX(1); }
+  .feat-card:hover { border-color: var(--saffron); transform: translateY(-2px); }
+
+  .feat-card.teal-accent::before { background: var(--teal); }
+  .feat-card.teal-accent:hover { border-color: var(--teal); }
+
+  .feat-icon-wrap {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .feat-icon-wrap.orange { background: var(--saffron-light); }
+  .feat-icon-wrap.teal { background: var(--teal-light); }
+  .feat-icon-wrap.purple { background: #EDE8FE; }
+
+  .feat-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .feat-desc {
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  .feat-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+  }
+
+  .feat-tag.coming { background: #F3F0FF; color: #6B42E8; }
+  .feat-tag.live { background: #E8F7EF; color: #0A7A50; }
+
+  /* ======= IMPACT ======= */
+  .impact-section {
+    background: linear-gradient(135deg, #1C1A17 0%, #2D2A22 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .impact-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232,119,34,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .impact-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3.5rem;
+  }
+
+  .impact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .impact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .check-circle {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--saffron);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 0.7rem;
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .sdg-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .sdg-number {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--saffron);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .sdg-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+  }
+
+  .sdg-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .sdg-desc {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  .sdg-targets {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .sdg-target {
+    background: rgba(232,119,34,0.2);
+    color: var(--saffron);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ======= TECH STACK ======= */
+  .tech-section { background: var(--cream); }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .tech-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .tech-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--saffron);
+  }
+
+  .tech-emoji { font-size: 2rem; margin-bottom: 0.75rem; }
+
+  .tech-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .tech-role {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    margin-top: 0.25rem;
+  }
+
+  /* ======= AUDIENCE ======= */
+  .audience-section { background: var(--white); }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .audience-card {
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .audience-card.a1 { background: var(--saffron-light); }
+  .audience-card.a2 { background: var(--teal-light); }
+  .audience-card.a3 { background: #F0EBF9; }
+
+  .audience-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .audience-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .audience-desc {
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    line-height: 1.65;
+  }
+
+  /* ======= CTA ======= */
+  .cta-section {
+    background: var(--saffron);
+    text-align: center;
+    padding: 6rem 3rem;
+  }
+
+  .cta-section .section-label { color: rgba(255,255,255,0.7); }
+
+  .cta-section .section-title {
+    color: var(--white);
+    max-width: 620px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .cta-section .section-sub {
+    color: rgba(255,255,255,0.8);
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+
+  .btn-white {
+    background: var(--white);
+    color: var(--saffron-dark);
+    padding: 1rem 2.5rem;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  }
+
+  /* ======= FOOTER ======= */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .footer-logo span { color: var(--saffron); }
+
+  .footer-note {
+    font-size: 0.78rem;
+    opacity: 0.6;
+  }
+
+  /* ======= ANIMATIONS ======= */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.25s; }
+  .fade-up:nth-child(3) { animation-delay: 0.4s; }
+
+  /* ======= RESPONSIVE ======= */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2.5rem; }
+    .problem-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .problem-stats { grid-template-columns: 1fr 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .features-header { grid-template-columns: 1fr; gap: 2rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .impact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .tech-grid { grid-template-columns: repeat(3, 1fr); }
+    .audience-grid { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.5rem; }
+    .problem-strip { padding: 3rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Xchange<span>Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#audience">Who It's For</a></li>
+    <li><a href="#join" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 0;">
+  <div class="hero">
+    <div>
+      <div class="hero-badge fade-up">Design Impact Movement 2025 · Quality Education Track</div>
+      <h1 class="fade-up">
+        Teach what you know.<br>
+        Learn what you <span class="accent">need.</span><br>
+        <span class="teal">Zero money.</span>
+      </h1>
+      <p class="hero-desc fade-up">
+        XchangeHub is India's peer-to-peer skill exchange platform — connecting students, freelancers, and job seekers through community-driven, non-monetary learning. Built for Bharat.
+      </p>
+      <div class="hero-actions fade-up">
+        <a href="#join" class="btn-primary">Join the Waitlist →</a>
+        <a href="#how" class="btn-secondary">See how it works ↓</a>
+      </div>
+      <div class="hero-stats fade-up">
+        <div>
+          <div class="stat-num">300M+</div>
+          <div class="stat-label">rural internet users in India</div>
+        </div>
+        <div>
+          <div class="stat-num">₹0</div>
+          <div class="stat-label">cost to exchange skills</div>
+        </div>
+        <div>
+          <div class="stat-num">4.4</div>
+          <div class="stat-label">UN SDG target we serve</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Visual -->
+    <div class="hero-visual">
+      <div class="exchange-diagram">
+        <!-- Floating chips -->
+        <div class="float-chip" style="top: -30px; right: 20px;">
+          <span class="chip-dot" style="background: #22C55E;"></span> Live exchange happening
+        </div>
+        <div class="float-chip" style="bottom: -20px; left: -10px;">
+          <span class="chip-dot" style="background: var(--saffron);"></span> 47 skills listed nearby
+        </div>
+
+        <div class="exchange-card">
+          <div style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.25rem;">Current Exchange</div>
+          <div class="user-pair">
+            <div class="user-bubble teach">
+              <div class="avatar s">PR</div>
+              <div class="user-name">Priya R.</div>
+              <div style="font-size: 0.75rem; color: var(--ink-muted);">Nagpur, MH</div>
+              <div class="skill-tag teach">Teaches Graphic Design</div>
+            </div>
+            <div class="exchange-arrow">
+              <div class="arrow-icon">⇄</div>
+              <div>Exchange</div>
+            </div>
+            <div class="user-bubble learn">
+              <div class="avatar t">AM</div>
+              <div class="user-name">Arjun M.</div>
+              <div style="font-size: 0.75rem; color: var(--ink-muted);">Mysuru, KA</div>
+              <div class="skill-tag learn">Teaches Python</div>
+            </div>
+          </div>
+
+          <div class="exchange-footer">
+            <span class="zero-badge">₹0 Exchanged</span>
+            <span>· Verified via community rating</span>
+            <span style="margin-left: auto; color: var(--teal); font-weight: 600;">⭐ 4.9</span>
+          </div>
+        </div>
+
+        <!-- Mini portfolio preview -->
+        <div style="background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; margin-top: 1rem; display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 40px; height: 40px; background: var(--saffron-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">🎨</div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-size: 0.85rem; font-weight: 600; color: var(--ink);">Priya's Portfolio Updated</div>
+            <div style="font-size: 0.75rem; color: var(--ink-faint);">+1 Digital badge earned · Python Basics</div>
+          </div>
+          <div style="background: #E8F7EF; color: #0A7A50; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; white-space: nowrap;">Verified ✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM STRIP -->
+<div class="problem-strip">
+  <div class="problem-grid">
+    <div>
+      <div class="section-label" style="color: var(--saffron);">The Problem</div>
+      <h2 class="problem-headline">India's skill gap is <span class="hl">real.</span> And costly.</h2>
+    </div>
+    <div class="problem-stats">
+      <div class="prob-stat">
+        <div class="prob-stat-num">58%</div>
+        <div class="prob-stat-desc">of freelancers have experienced non-payment for completed work</div>
+      </div>
+      <div class="prob-stat">
+        <div class="prob-stat-num">22%</div>
+        <div class="prob-stat-desc">actual placement rate vs. 54% claimed by PMKVY skill programs</div>
+      </div>
+      <div class="prob-stat">
+        <div class="prob-stat-num">31%</div>
+        <div class="prob-stat-desc">rural internet usage despite 75% smartphone ownership</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Four steps to your first exchange</h2>
+    <p class="section-sub">Simple enough for first-time smartphone users. Powerful enough for experienced freelancers.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-icon" style="background: var(--saffron-light);">📝</div>
+        <div class="how-title">Create Your Profile</div>
+        <div class="how-desc">List what you can teach and what you want to learn. Upload projects, certificates, and past work.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-icon" style="background: var(--teal-light);">🤝</div>
+        <div class="how-title">Get Matched</div>
+        <div class="how-desc">Our AI matches you with complementary learners based on skills, location, language, and schedule.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-icon" style="background: #F0EBF9;">💬</div>
+        <div class="how-title">Exchange Skills</div>
+        <div class="how-desc">Connect via in-app chat, video call, or offline. Teach what you know, learn what you need — zero cost.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <div class="how-icon" style="background: #E8F7EF;">🏅</div>
+        <div class="how-title">Earn Credentials</div>
+        <div class="how-desc">Get blockchain-verified digital badges and micro-credentials that prove your skills to employers globally.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features-section">
+  <div class="container">
+    <div class="features-header">
+      <div>
+        <div class="section-label">Platform Features</div>
+        <h2 class="section-title">Built for real India, not an imagined one</h2>
+      </div>
+      <p class="section-sub" style="margin-top: 1rem;">Every feature is designed around the constraints and aspirations of learners in Tier 2, Tier 3 cities and rural areas — low-bandwidth, low-cost, high-trust.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon-wrap orange">🔄</div>
+        <div class="feat-title">Peer-to-Peer Skill Exchange</div>
+        <div class="feat-desc">Teach what you know, learn what you need — no money changes hands. Community-driven and accessible to all income levels.</div>
+        <span class="feat-tag live">Live in MVP</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap orange">📁</div>
+        <div class="feat-title">Digital Portfolio Builder</div>
+        <div class="feat-desc">Upload school projects, freelance work, and certificates. Showcase your abilities without needing a formal degree or internship.</div>
+        <span class="feat-tag live">Live in MVP</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap teal">⭐</div>
+        <div class="feat-title">Reputation & Trust System</div>
+        <div class="feat-desc">Ratings, peer endorsements, and skill verifications build a trust layer that makes every exchange safe and accountable.</div>
+        <span class="feat-tag live">Live in MVP</span>
+      </div>
+      <div class="feat-card teal-accent">
+        <div class="feat-icon-wrap teal">🤖</div>
+        <div class="feat-title">AI-Powered Skill Matching</div>
+        <div class="feat-desc">Intelligent algorithms pair you with the ideal exchange partner — optimized for low-resource devices and intermittent connectivity.</div>
+        <span class="feat-tag coming">Phase 2</span>
+      </div>
+      <div class="feat-card teal-accent">
+        <div class="feat-icon-wrap purple">🔗</div>
+        <div class="feat-title">Blockchain Credentials</div>
+        <div class="feat-desc">Tamper-proof, globally verifiable digital badges issued for every skill you acquire. Your reputation travels with you.</div>
+        <span class="feat-tag coming">Phase 2</span>
+      </div>
+      <div class="feat-card teal-accent">
+        <div class="feat-icon-wrap purple">🌐</div>
+        <div class="feat-title">Regional Language Interface</div>
+        <div class="feat-desc">Full support for Hindi, Marathi, Tamil, Telugu, Bengali and more — because quality education shouldn't require English fluency.</div>
+        <span class="feat-tag coming">Phase 2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="impact-section">
+  <div class="impact-inner">
+    <div class="section-label" style="color: var(--saffron);">Social Impact</div>
+    <h2 class="section-title" style="color: var(--white);">Designed for equity,<br>built for scale</h2>
+    <div class="impact-grid">
+      <ul class="impact-list">
+        <li>
+          <div class="check-circle">✓</div>
+          <span>Bridges the digital divide with offline-first architecture and AI models optimized for low-cost devices</span>
+        </li>
+        <li>
+          <div class="check-circle">✓</div>
+          <span>Removes financial barriers entirely — no subscriptions, no commissions, no hidden costs</span>
+        </li>
+        <li>
+          <div class="check-circle">✓</div>
+          <span>Empowers women in rural areas with verified, portable credentials that work without geographic access to institutions</span>
+        </li>
+        <li>
+          <div class="check-circle">✓</div>
+          <span>Reduces rural-to-urban migration by creating local livelihood opportunities through community skill networks</span>
+        </li>
+        <li>
+          <div class="check-circle">✓</div>
+          <span>Complements government programs (Skill India, PMKVY) by focusing on outcome-driven learning, not just training completion</span>
+        </li>
+        <li>
+          <div class="check-circle">✓</div>
+          <span>Strictly compliant with India's DPDP Act 2023 — your data is yours, especially for minors</span>
+        </li>
+      </ul>
+      <div class="sdg-card">
+        <div class="sdg-number">4</div>
+        <div class="sdg-label">UN Sustainable Development Goal</div>
+        <div class="sdg-title">Quality Education</div>
+        <div class="sdg-desc">XchangeHub directly advances inclusive and equitable quality education and promotes lifelong learning opportunities for all.</div>
+        <div class="sdg-targets">
+          <span class="sdg-target">Target 4.3 — Vocational skills</span>
+          <span class="sdg-target">Target 4.4 — Skills for work</span>
+          <span class="sdg-target">Target 4.5 — Equity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech-section">
+  <div class="container">
+    <div class="section-label">Technology</div>
+    <h2 class="section-title">Built for low-bandwidth India</h2>
+    <p class="section-sub">A modern, resilient stack that works even with intermittent connectivity — designed for rural realities, not Silicon Valley assumptions.</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-emoji">⚡</div>
+        <div class="tech-name">Next.js</div>
+        <div class="tech-role">Web frontend (SSR/SSG)</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">📱</div>
+        <div class="tech-name">Flutter</div>
+        <div class="tech-role">Mobile app (offline-first)</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">🚀</div>
+        <div class="tech-name">Node.js</div>
+        <div class="tech-role">Backend API</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">🧠</div>
+        <div class="tech-name">TensorFlow Lite</div>
+        <div class="tech-role">Edge AI matching</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">🔐</div>
+        <div class="tech-name">Blockchain</div>
+        <div class="tech-role">Verifiable credentials</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">🗃️</div>
+        <div class="tech-name">PostgreSQL</div>
+        <div class="tech-role">Structured data</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">📦</div>
+        <div class="tech-name">MongoDB</div>
+        <div class="tech-role">Flexible content</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">🔒</div>
+        <div class="tech-name">Firebase Auth</div>
+        <div class="tech-role">Secure identity</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">💳</div>
+        <div class="tech-name">Razorpay</div>
+        <div class="tech-role">UPI (future features)</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-emoji">☁️</div>
+        <div class="tech-name">AWS + Vercel</div>
+        <div class="tech-role">Scalable hosting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section id="audience" class="audience-section">
+  <div class="container">
+    <div class="section-label">Who It's For</div>
+    <h2 class="section-title">Everyone who learns<br>by doing</h2>
+    <div class="audience-grid">
+      <div class="audience-card a1">
+        <span class="audience-emoji">🎓</span>
+        <div class="audience-title">Students & Fresh Graduates</div>
+        <div class="audience-desc">No internship? No formal credential? Build your portfolio by exchanging your existing skills — coding, art, languages, music — and gain new ones from peers across India.</div>
+      </div>
+      <div class="audience-card a2">
+        <span class="audience-emoji">💼</span>
+        <div class="audience-title">Aspiring Freelancers</div>
+        <div class="audience-desc">Skip the 20% platform commission. Build a verified skills portfolio and reputation before you pitch clients. Learn business, tax, and digital branding through peers who've done it.</div>
+      </div>
+      <div class="audience-card a3">
+        <span class="audience-emoji">🌾</span>
+        <div class="audience-title">Rural & Underprivileged Youth</div>
+        <div class="audience-desc">Even "affordable" EdTech is out of reach for many. XchangeHub is built for ₹0. Works offline. Available in your language. Your knowledge has value — we make it exchangeable.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="join" class="cta-section">
+  <div class="section-label">Get Early Access</div>
+  <h2 class="section-title">Be part of India's skill exchange revolution</h2>
+  <p class="section-sub">XchangeHub is in active development for Design Impact Movement 2025. Join the waitlist and be among the first to exchange skills on the platform.</p>
+
+  <div style="max-width: 480px; margin: 0 auto 2rem; display: flex; flex-direction: column; gap: 0.875rem;">
+    <input type="text" placeholder="Your full name" id="name-input"
+      style="padding: 1rem 1.5rem; border-radius: 100px; border: 2px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); color: var(--white); font-size: 1rem; font-family: var(--font-body); width: 100%; outline: none;"
+      oninput="this.style.borderColor='rgba(255,255,255,0.35)'"
+    >
+    <input type="email" placeholder="your@email.com" id="email-input"
+      style="padding: 1rem 1.5rem; border-radius: 100px; border: 2px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); color: var(--white); font-size: 1rem; font-family: var(--font-body); width: 100%; outline: none;"
+      oninput="this.style.borderColor='rgba(255,255,255,0.35)'"
+    >
+    <textarea placeholder="Which skills can you teach? What do you want to learn? (optional)" id="skills-input" rows="2"
+      style="padding: 1rem 1.5rem; border-radius: 16px; border: 2px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); color: var(--white); font-size: 1rem; font-family: var(--font-body); width: 100%; outline: none; resize: none;"
+      oninput="this.style.borderColor='rgba(255,255,255,0.35)'"
+    ></textarea>
+    <button onclick="handleSignup()" id="cta-btn" class="btn-white" style="width: 100%; border: none; cursor: pointer; font-size: 1rem;">
+      Join Waitlist — Send Request →
+    </button>
+  </div>
+
+  <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 2rem;">
+    Clicking the button will open your email app with a pre-filled message to <strong style="color: rgba(255,255,255,0.8);">hello@krishidnya.com</strong>
+  </p>
+
+  <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">By <strong style="color: rgba(255,255,255,0.9);">Tejas Sanjay Barguje</strong> · Design Impact Movement 2025 · Quality Education Track</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Xchange<span>Hub</span></div>
+  <div class="footer-note">A non-monetary skill exchange platform for Bharat. Designed for impact, built for scale.</div>
+  <div style="font-size: 0.78rem;">© 2025 XchangeHub · Design Impact Movement</div>
+</footer>
+
+<script>
+  function handleSignup() {
+    const name = document.getElementById('name-input').value.trim();
+    const email = document.getElementById('email-input').value.trim();
+    const skills = document.getElementById('skills-input').value.trim();
+    const btn = document.getElementById('cta-btn');
+
+    let valid = true;
+    if (!name) {
+      document.getElementById('name-input').style.borderColor = 'rgba(255,200,100,0.9)';
+      valid = false;
+    }
+    if (!email || !email.includes('@')) {
+      document.getElementById('email-input').style.borderColor = 'rgba(255,200,100,0.9)';
+      valid = false;
+    }
+    if (!valid) return;
+
+    const subject = encodeURIComponent('XchangeHub Waitlist — ' + name);
+    const body = encodeURIComponent(
+`Hi XchangeHub Team,
+
+I'd like to join the XchangeHub waitlist!
+
+Name: ${name}
+Email: ${email}
+${skills ? 'Skills / Interests: ' + skills : ''}
+
+I'm excited about the peer-to-peer skill exchange platform and look forward to being part of the community.
+
+— ${name}`
+    );
+
+    window.location.href = `mailto:hello@krishidnya.com?subject=${subject}&body=${body}`;
+
+    btn.textContent = '✓ Email app opened!';
+    btn.style.background = '#E8F7EF';
+    btn.style.color = '#0A7A50';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Join Waitlist — Send Request →';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.disabled = false;
+    }, 4000);
+  }
+
+  // Intersection Observer for fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.how-card, .feat-card, .audience-card, .tech-card, .prob-stat').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
